@@ -27,7 +27,7 @@ def RestaurantOutput(restaurant_list):
         # print each result with a number, starting at 1 and going up at the beginning of the line.
         print(f"{i + 1}: ", restaurant_list[i].info(), "\n") 
 
-def RestaurantInterface(userInput="exit", location='ann arbor, mi'):
+def RestaurantInterface(userInput="exit", sort='rating', numResults=10):
     '''interactive search interface
     
     Given the user's choice, fetch data from the local restaurant or exit.
@@ -37,15 +37,35 @@ def RestaurantInterface(userInput="exit", location='ann arbor, mi'):
     userInput: string
         the choice of user, could be a term, or the index that user is interested in or exit
 
+    sort: string
+        the choice of sorting, could be rating or distance
+
+    numResults: int
+        the choice of number of results showing
+
     Returns
     -------
     print interactive search interface
     
     '''
+    sortInput = input('Please indicate your sorting requirement: 1. rating or 2. distance: ')
+    
+    if sortInput == '1' or sortInput == 'rating':
+        sort = 'rating'
+    elif sortInput == '2' or sortInput == 'distance':
+        sort = 'distance'
+    else:
+        print('Cannot distinguish your requirement, use rating instead')
+    
+    numResultsInput = input('Please indicate how many results would you like to show: ')
+    if numResultsInput.isdigit():
+        numResults = int(numResultsInput)
+    else:
+        print('Cannot distinguish your requirement, use 10 instead')
     
     if userInput != "exit":
 
-        response = yelp_api.search_query(term=userInput, location=location, sort_by='distance', limit=10)
+        response = yelp_api.search_query(term=userInput, location='ann arbor, mi', sort_by=sort, limit=numResults)
         json_data = response['businesses']
         
         restaurant_list = []
