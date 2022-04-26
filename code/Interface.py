@@ -98,17 +98,14 @@ def RestaurantInterface(userInput="exit", sort='rating', numResults=10):
     else:
         print("Thanks for using the restaurant recommendation system! ")
 
-def DestinationInput(destinationList, totalDestinationFile):
+def DestinationInput(totalLocationFile):
     '''interactive destination input interface
     
     Given the user's choices, conclude them into a destination list
 
     Parameters:
     ---------- 
-    destinationList: list
-        the user's choice of where to visit
-
-    totalDestinationFile: filename
+    totalLocationFile: filename
         all the destinations user could choose from
 
     Returns
@@ -117,26 +114,34 @@ def DestinationInput(destinationList, totalDestinationFile):
         the user's choice of where to visit
     
     '''
-    
-    userInput = input('Enter a destination to travel, or "end" to end: ')
+    destinationList = []
+    userInput = input('Enter a destination to travel, or "all" to choose all the destinations, or "end" to end: ')
 
-    if userInput != 'end':
+    while userInput != 'end':
         
         # if the user input is in the options, set it into the destination list
-        if (int(userInput) - 1) in range(GetSizeOfFile(totalDestinationFile)):   
+        if userInput == 'all':
+            destinationList = []
+            
+            for i in range(1, GetSizeOfFile(totalLocationFile) + 1):
+                destinationList.append(i)
+            break
+
+        elif (int(userInput) - 1) in range(GetSizeOfFile(totalLocationFile)):   
             if int(userInput) in destinationList: # if already in the list, prompt for input again
                 print('This place has been chosen, please enter again ')
-                DestinationInput(destinationList, totalDestinationFile)
             else:
                 destinationList.append(int(userInput))
-                DestinationInput(destinationList, totalDestinationFile)
         else: 
             print('Invalid number, please enter again ')
-            DestinationInput(destinationList, totalDestinationFile)
 
-    else:
-        print('Here is your destination list: ', destinationList)
-        return destinationList
+        if len(destinationList) > 10:
+            print('WARNING: The whole system will be very slow!!! ')
+        
+        userInput = input('Enter a destination to travel, or "all" to choose all the destinations, or "end" to end: ')
+
+    print('Here is your destination list: ', destinationList)
+    return destinationList
 
 def TourGuideInterface():
     '''interactive tour guide interface
@@ -153,10 +158,9 @@ def TourGuideInterface():
     
     '''
     
-    ReadDestinationFile('totalDestinations.txt')
+    ReadDestinationFile('destinations.txt')
     print('\n')
-    destinationList = []
-    DestinationInput(destinationList, 'totalDestinations.txt')
+    destinationList = DestinationInput('locations.txt')
 
     if destinationList == []:
         print('Sorry for that. Please come later for more interesting spots!')
@@ -165,7 +169,7 @@ def TourGuideInterface():
         print("Too few destinations! ")
         return
 
-    graph = Graph(destinationList, 'totalDistanceCache.json', 'totalLocations.txt')
+    graph = Graph(destinationList, 'distanceCache.json', 'locations.txt')
 
     startLoc = input('Please enter your start location: ')
     
@@ -193,7 +197,7 @@ def userInterface():
     '''
     
     print('Welcome to our tour guide system!')
-    print('Please choose the function you want: ', '\n', '1. Campus Tour Guide', '\n', '2. Restaurant Recommendation', '\n', '3. Exit')
+    print('Please choose the function you want: ', '\n', '1. Campus Tour Guide', '\n', '2. Local Restaurant Recommendation', '\n', '3. Exit')
     userInput = input()
     
     if userInput == '1':
