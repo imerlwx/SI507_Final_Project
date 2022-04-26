@@ -5,4 +5,4 @@ To run the program, just execute the Interface.py.
 
 No need for extra API keys because most of the jsons have been stored in cache.
 
-The data structure is a graph. Each node of the graph represent a destination that user want to visit. Each edge represent the distance of the two locations.
+The data structure is a graph. Each node of the graph represents a destination that user want to visit. Each edge represents the distance of the two locations.
