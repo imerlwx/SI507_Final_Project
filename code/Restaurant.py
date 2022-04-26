@@ -1,12 +1,7 @@
-'''
-This file will define a restaurant object which will contain a restaurant's attributes
-
-'''
-
 class Restaurant:
     '''
     
-    This function is to find the shortest path given the Graph object and start location
+    This class defines the attributes and methods about restaurants
 
     Parameters:
     ---------- 

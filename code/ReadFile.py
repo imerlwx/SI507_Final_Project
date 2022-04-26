@@ -1,6 +1,4 @@
-'''
-Two functions that could read file are defined
-'''
+# some functions about read files
 
 def ReadDestinationFile(destinationFile):
     '''
