@@ -3,7 +3,7 @@ import json
 from ReadFile import ReadLocationFile
 
 
-def CalculateDistanceToCache(locationFileName, CACHE_FILENAME):
+def CalculateDistanceToCache(locationFileName, cacheFileName):
     ''' Get the information from two locations in the location file to the cache
 
     Parameters
@@ -11,7 +11,7 @@ def CalculateDistanceToCache(locationFileName, CACHE_FILENAME):
     locationFileName: string
         the file that contains all the specfic locations of the destinations, should be .txt file
     
-    CACHE_FILENAME: string
+    cacheFileName: string
         the cache file that write to, should be .json file
 
     Returns
@@ -22,7 +22,7 @@ def CalculateDistanceToCache(locationFileName, CACHE_FILENAME):
     locationList = ReadLocationFile(locationFileName)
     apikey = 'OAfDV93FwvvWxqNAzhP2nmemBPnNh'
     basicUrl = 'https://api.distancematrix.ai/maps/api/distancematrix/json?origins='
-    fw = open(CACHE_FILENAME,"w")
+    fw = open(cacheFileName,"w")
 
     for i in range(len(locationList)):
         for j in range(i + 1, len(locationList)):

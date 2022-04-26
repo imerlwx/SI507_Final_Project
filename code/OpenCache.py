@@ -1,6 +1,6 @@
 import json
 
-def OpenCache(CACHE_FILENAME, index):
+def OpenCache(cacheFileName, index):
     ''' opens the cache file if it exists and loads the JSON into
     the FIB_CACHE dictionary.
 
@@ -8,14 +8,18 @@ def OpenCache(CACHE_FILENAME, index):
     
     Parameters
     ----------
-    None
+    cacheFileName: string
+        the file name of the cache
+    
+    index: int
+        the index of line in the cache file
 
     Returns
     -------
-    The opened cache
+    The cache line of index
     '''
     try:
-        cache_file = open(CACHE_FILENAME, 'r')
+        cache_file = open(cacheFileName, 'r')
         cache_contents = cache_file.read()
         cacheList = list(cache_contents.split('\n'))
         cache_dict = json.loads(cacheList[index])

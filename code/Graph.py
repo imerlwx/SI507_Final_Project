@@ -129,6 +129,7 @@ class Graph():
 
         Parameters:
         ---------- 
+        None
 
         Returns
         -------
@@ -140,3 +141,36 @@ class Graph():
             self.add_edge(*edge)
 
         return self.edges
+    
+    def StoreGraph(self, cacheFileName):
+        '''
+        This function will store some of the graph's attributes into a cache
+
+        Parameters:
+        ---------- 
+        cacheFileName: string
+            the file name of the cache
+
+        Returns
+        -------
+        None
+        
+        '''
+        fw = open(cacheFileName,"w")
+        fw.write('Graph Nodes:')
+        fw.write('\n')
+        fw.write(str(self.nodes))
+        fw.write('\n')
+        fw.write('Graph Edge List:')
+        fw.write('\n')
+        fw.write(str(self.edgeList))
+        fw.write('\n')
+        fw.write('Graph Edge Dictionary:')
+        fw.write('\n')
+        fw.write(str(self.edgeDict))
+        fw.write('\n')
+        fw.write('Graph Edge Matrix:')
+        fw.write('\n')
+        fw.write(str(self.edgeMatrix))
+        fw.write('\n')
+        fw.close()

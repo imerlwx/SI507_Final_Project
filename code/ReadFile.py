@@ -1,23 +1,21 @@
 # some functions about read files
 
-def ReadDestinationFile(destinationFile):
+def ReadFileAll(filename):
     '''
-    
-    This function will read the destination file and output it
+    This function will read all the contents in the file and output it
 
     Parameters:
     ---------- 
-    destinationFile: string
-        the file that contains all the destinations
+    filename: string
+        the file's name
 
     Returns
     -------
     print all the destinations line by line
     
     '''
-    
     # Using readlines()
-    file = open(destinationFile, 'r')
+    file = open(filename, 'r')
     Lines = file.readlines()
 
     for line in Lines:
@@ -27,7 +25,6 @@ def ReadDestinationFile(destinationFile):
 
 def ReadLocationFile(locationFile):
     '''
-    
     This function will read the location file and return a location list
 
     Parameters:
@@ -39,9 +36,8 @@ def ReadLocationFile(locationFile):
     -------
     locationList: list
         a list that contain all the locations
-    
+
     '''
-    
     # Using readlines()
     file = open(locationFile, 'r')
     file_contents = file.read()
@@ -52,7 +48,6 @@ def ReadLocationFile(locationFile):
 
 def GetSizeOfFile(FILENAME):
     '''
-    
     This function will read the location file and return a location list
 
     Parameters:
@@ -66,8 +61,28 @@ def GetSizeOfFile(FILENAME):
         the number of lines in the file
     
     '''
-
     with open(FILENAME, 'r') as fp:
         lengthOfFile = len(fp.readlines())
 
     return lengthOfFile
+
+def ReadFileLineByLine(filename, index):
+    '''
+    This function will read a file line by line
+
+    Parameters:
+    ---------- 
+    filename: string
+        the file's name
+
+    Returns
+    -------
+    print the file contents line by line
+    
+    '''
+    file = open(filename, 'r')
+    Lines = file.readlines()
+
+    print(Lines[index])
+
+    file.close()

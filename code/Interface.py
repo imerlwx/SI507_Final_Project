@@ -2,7 +2,7 @@ from Restaurant import Restaurant
 from yelpapi import YelpAPI
 import webbrowser
 from FindShortestPath import FindShortestPath
-from ReadFile import GetSizeOfFile, ReadDestinationFile
+from ReadFile import GetSizeOfFile, ReadFileAll
 from Graph import Graph
 
 yelp_api = YelpAPI('A5eJ8VgQCSTyvS4T8klmR7N4xwZA6Vayb5AMRPbfsI2nRuJB1ZqRwQJWfmraTOev7tLgApMtrF-uMr5P90MRvlTL2fxG1Ocsg_7MywgJUgX3BZV8TXz44W3xSb5UYnYx')
@@ -158,7 +158,7 @@ def TourGuideInterface():
     
     '''
     
-    ReadDestinationFile('destinations.txt')
+    ReadFileAll('destinations.txt')
     print('\n')
     destinationList = DestinationInput('locations.txt')
 
@@ -170,15 +170,25 @@ def TourGuideInterface():
         return
 
     graph = Graph(destinationList, 'distanceCache.json', 'locations.txt')
+    graph.StoreGraph('graph.json')
 
     startLoc = input('Please enter your start location: ')
-    
     minPath, shortestLength = FindShortestPath(graph, int(startLoc))
+
+    while minPath == []:
+        print('The start location is not in the destination list! ')
+        startLoc = input('Please enter your start location: ')
+        minPath, shortestLength = FindShortestPath(graph, int(startLoc))
 
     print('The shortest path is', destinationList[minPath[0]], end = ' ')
     for i in range(1, len(minPath)):
         print('--->', destinationList[minPath[i]], end = ' ')
     print('. The length of this path is', shortestLength / 1000, 'km')
+
+    userInput = input('Would you like to see the graph structure? 1. Yes 2. No ')
+    if userInput == '1' or 'Yes':
+        ReadFileAll('graph.json')
+
     print('Thanks for using the tour guide system! ')
 
 def userInterface(): 

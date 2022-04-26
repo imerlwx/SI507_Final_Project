@@ -26,7 +26,6 @@ def FindShortestPath(graph, startLoc):
     '''
 
     if (startLoc - 1) not in graph.nodes:
-        print('The start location is not in the destination list! ')
         return [], maxsize
 
     startLocIndex = graph.nodes.index(startLoc - 1)
