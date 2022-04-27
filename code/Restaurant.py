@@ -24,6 +24,7 @@ class Restaurant:
         self.location = dict['location']['display_address']
         self.rating = dict['rating']
         self.url = dict['url']
+        self.distance = round(dict['distance'], 1)
 
     def info(self):
-        return str(self.name) + " about " + str(self.categories) + " (" + str(self.rating) + ")"
+        return str(self.name) + " about " + str(self.categories) + " (rating: " + str(self.rating) + ")" + " (distance: " + str(self.distance) + "m)"
