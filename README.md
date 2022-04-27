@@ -1,4 +1,4 @@
-# SI507_Final_Project
+# SI507 Final Project
 
 ## What is this repo about?
 Including all the data source cache (1 .json file), texts (2 .txt files) and source codes (9 .py files) of SI 507 final project, which will build a visitor system for University of Michigan. Users could use this system to have optimal path planning of the spots they choose, or to browse the restaurant recommendation in Ann Arbor based on their choice of food category.
