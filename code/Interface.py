@@ -2,7 +2,7 @@ from Restaurant import Restaurant
 from yelpapi import YelpAPI
 import webbrowser
 from FindShortestPath import FindShortestPath
-from ReadFile import GetSizeOfFile, ReadFileAll
+from ReadFile import GetSizeOfFile, ReadFileAll, ReadFileLineByLine
 from Graph import Graph
 
 yelp_api = YelpAPI('A5eJ8VgQCSTyvS4T8klmR7N4xwZA6Vayb5AMRPbfsI2nRuJB1ZqRwQJWfmraTOev7tLgApMtrF-uMr5P90MRvlTL2fxG1Ocsg_7MywgJUgX3BZV8TXz44W3xSb5UYnYx')
@@ -180,16 +180,20 @@ def TourGuideInterface():
         startLoc = input('Please enter your start location: ')
         minPath, shortestLength = FindShortestPath(graph, int(startLoc))
 
-    print('The shortest path is', destinationList[minPath[0]], end = ' ')
+    print('\n', 'The shortest path is', destinationList[minPath[0]], end = ' ')
     for i in range(1, len(minPath)):
         print('--->', destinationList[minPath[i]], end = ' ')
     print('. The length of this path is', shortestLength / 1000, 'km')
 
+    print('\nThe locations in order is\n')
+    for i in range(len(minPath)):
+        ReadFileLineByLine('locations.txt', destinationList[minPath[i]] - 1)
+    
     userInput = input('Would you like to see the graph structure? 1. Yes 2. No ')
-    if userInput == '1' or 'Yes':
+    if userInput == '1' or userInput == 'Yes':
         ReadFileAll('graph.json')
 
-    print('Thanks for using the tour guide system! ')
+    print('Thanks for using the campus tour guide system! ')
 
 def userInterface(): 
     '''total interface
@@ -206,7 +210,7 @@ def userInterface():
     
     '''
     
-    print('Welcome to our tour guide system!')
+    print('\nWelcome to our University of Michigan vistor system!\n')
     print('Please choose the function you want: ', '\n', '1. Campus Tour Guide', '\n', '2. Local Restaurant Recommendation', '\n', '3. Exit')
     userInput = input()
     
@@ -219,7 +223,7 @@ def userInterface():
         RestaurantInterface(category)
         userInterface()
     elif userInput == '3':
-        print('\n', 'Bye!', '\n')
+        print('\nBye!\n')
         return
     else:
         print('Please input between 1, 2, 3')

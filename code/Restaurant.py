@@ -1,6 +1,5 @@
 class Restaurant:
     '''
-    
     This class defines the attributes and methods about restaurants
 
     Parameters:

@@ -1,6 +1,5 @@
 def FindIndex(locationA_index, locationB_index, totalDestinationNum):
     '''
-    
     This function is to find the index of the two locations in the cache
 
     Parameters:

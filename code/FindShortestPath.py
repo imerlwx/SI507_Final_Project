@@ -4,7 +4,6 @@ from itertools import permutations
 # implementation of traveling Salesman Problem
 def FindShortestPath(graph, startLoc):
     '''
-    
     This function is to find the shortest path given the Graph object and start location
 
     Parameters:
